@@ -1,0 +1,116 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -U -M 2
+Relation:     ecoli
+Instances:    336
+Attributes:   8
+              mcg
+              gvh
+              lip
+              chg
+              aac
+              alm1
+              alm2
+              class
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 unpruned tree
+------------------
+
+alm1 <= 0.57
+|   gvh <= 0.58
+|   |   lip <= 0.48
+|   |   |   mcg <= 0.62
+|   |   |   |   aac <= 0.17: cp (2.0/1.0)
+|   |   |   |   aac > 0.17
+|   |   |   |   |   gvh <= 0.5: cp (120.0/2.0)
+|   |   |   |   |   gvh > 0.5
+|   |   |   |   |   |   alm2 <= 0.47: cp (16.0/1.0)
+|   |   |   |   |   |   alm2 > 0.47
+|   |   |   |   |   |   |   gvh <= 0.54: im (3.0/1.0)
+|   |   |   |   |   |   |   gvh > 0.54: cp (4.0)
+|   |   |   mcg > 0.62
+|   |   |   |   aac <= 0.62
+|   |   |   |   |   mcg <= 0.69: cp (4.0/1.0)
+|   |   |   |   |   mcg > 0.69: pp (4.0/1.0)
+|   |   |   |   aac > 0.62: om (4.0)
+|   |   lip > 0.48: omL (4.0/1.0)
+|   gvh > 0.58
+|   |   aac <= 0.64: pp (44.0/3.0)
+|   |   aac > 0.64: om (12.0)
+alm1 > 0.57
+|   lip <= 0.48
+|   |   mcg <= 0.61
+|   |   |   aac <= 0.58: im (41.0)
+|   |   |   aac > 0.58
+|   |   |   |   mcg <= 0.55: im (14.0/1.0)
+|   |   |   |   mcg > 0.55: imU (2.0)
+|   |   mcg > 0.61
+|   |   |   alm2 <= 0.59: pp (4.0/1.0)
+|   |   |   alm2 > 0.59
+|   |   |   |   mcg <= 0.74
+|   |   |   |   |   gvh <= 0.53
+|   |   |   |   |   |   mcg <= 0.67
+|   |   |   |   |   |   |   alm2 <= 0.82: imU (9.0/2.0)
+|   |   |   |   |   |   |   alm2 > 0.82: im (2.0)
+|   |   |   |   |   |   mcg > 0.67
+|   |   |   |   |   |   |   aac <= 0.56: im (5.0)
+|   |   |   |   |   |   |   aac > 0.56
+|   |   |   |   |   |   |   |   mcg <= 0.71: im (6.0/2.0)
+|   |   |   |   |   |   |   |   mcg > 0.71: imU (2.0)
+|   |   |   |   |   gvh > 0.53: im (6.0/1.0)
+|   |   |   |   mcg > 0.74
+|   |   |   |   |   alm1 <= 0.72
+|   |   |   |   |   |   mcg <= 0.81: imU (5.0)
+|   |   |   |   |   |   mcg > 0.81: im (3.0)
+|   |   |   |   |   alm1 > 0.72: imU (14.0)
+|   lip > 0.48
+|   |   mcg <= 0.63: im (3.0/2.0)
+|   |   mcg > 0.63: omL (3.0/1.0)
+
+Number of Leaves  : 	26
+
+Size of the tree : 	51
+
+
+Time taken to build model: 0.01 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         281               83.631  %
+Incorrectly Classified Instances        55               16.369  %
+Kappa statistic                          0.7743
+Mean absolute error                      0.0482
+Root mean squared error                  0.1883
+Relative absolute error                 26.3752 %
+Root relative squared error             62.4225 %
+Total Number of Instances              336     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.944    0.036    0.951      0.944    0.947      0.909    0.959     0.917     cp
+                 0.844    0.073    0.774      0.844    0.807      0.748    0.922     0.776     im
+                 0.846    0.032    0.830      0.846    0.838      0.808    0.893     0.668     pp
+                 0.571    0.027    0.714      0.571    0.635      0.602    0.852     0.631     imU
+                 0.700    0.032    0.583      0.700    0.636      0.614    0.892     0.656     om
+                 0.600    0.006    0.600      0.600    0.600      0.594    0.993     0.604     omL
+                 0.000    0.000    0.000      0.000    0.000      0.000    0.491     0.006     imL
+                 0.000    0.000    0.000      0.000    0.000      0.000    0.481     0.006     imS
+Weighted Avg.    0.836    0.042    0.828      0.836    0.831      0.791    0.920     0.785     
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   <-- classified as
+ 135   1   4   0   3   0   0   0 |   a = cp
+   2  65   0   8   2   0   0   0 |   b = im
+   4   2  44   0   2   0   0   0 |   c = pp
+   1  12   1  20   1   0   0   0 |   d = imU
+   0   3   3   0  14   0   0   0 |   e = om
+   0   0   0   0   2   3   0   0 |   f = omL
+   0   0   0   0   0   2   0   0 |   g = imL
+   0   1   1   0   0   0   0   0 |   h = imS
+

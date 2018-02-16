@@ -1,0 +1,160 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.RandomTree -K 0 -M 1.0 -V 0.001 -S 1
+Relation:     Glass
+Instances:    214
+Attributes:   10
+              RI
+              Na
+              Mg
+              Al
+              Si
+              K
+              Ca
+              Ba
+              Fe
+              Type
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+
+RandomTree
+==========
+
+Ba < 0.34
+|   Mg < 2.56
+|   |   Na < 13.79
+|   |   |   Ca < 12.87
+|   |   |   |   Na < 13.5
+|   |   |   |   |   RI < 1.52
+|   |   |   |   |   |   Na < 12.47 : headlamps (1/0)
+|   |   |   |   |   |   Na >= 12.47 : containers (2/0)
+|   |   |   |   |   RI >= 1.52 : containers (10/0)
+|   |   |   |   Na >= 13.5 : build wind non-float (4/0)
+|   |   |   Ca >= 12.87 : build wind non-float (6/0)
+|   |   Na >= 13.79
+|   |   |   RI < 1.52 : tableware (9/0)
+|   |   |   RI >= 1.52
+|   |   |   |   RI < 1.52 : build wind non-float (2/0)
+|   |   |   |   RI >= 1.52 : headlamps (1/0)
+|   Mg >= 2.56
+|   |   Al < 1.42
+|   |   |   Mg < 3.87
+|   |   |   |   RI < 1.52
+|   |   |   |   |   RI < 1.52 : build wind float (3/0)
+|   |   |   |   |   RI >= 1.52
+|   |   |   |   |   |   Si < 72.72 : vehic wind float (5/0)
+|   |   |   |   |   |   Si >= 72.72
+|   |   |   |   |   |   |   Al < 1.25 : build wind non-float (3/0)
+|   |   |   |   |   |   |   Al >= 1.25
+|   |   |   |   |   |   |   |   Mg < 3.56 : vehic wind float (2/0)
+|   |   |   |   |   |   |   |   Mg >= 3.56 : build wind non-float (1/0)
+|   |   |   |   RI >= 1.52
+|   |   |   |   |   Na < 13.62
+|   |   |   |   |   |   RI < 1.52
+|   |   |   |   |   |   |   Si < 73.47 : build wind float (30/0)
+|   |   |   |   |   |   |   Si >= 73.47
+|   |   |   |   |   |   |   |   RI < 1.52 : build wind non-float (1/0)
+|   |   |   |   |   |   |   |   RI >= 1.52 : build wind float (1/0)
+|   |   |   |   |   |   RI >= 1.52
+|   |   |   |   |   |   |   Ca < 8.72
+|   |   |   |   |   |   |   |   Mg < 3.55 : build wind float (1/0)
+|   |   |   |   |   |   |   |   Mg >= 3.55 : build wind non-float (7/0)
+|   |   |   |   |   |   |   Ca >= 8.72
+|   |   |   |   |   |   |   |   Na < 13.04 : build wind non-float (3/0)
+|   |   |   |   |   |   |   |   Na >= 13.04
+|   |   |   |   |   |   |   |   |   RI < 1.52 : build wind float (14/0)
+|   |   |   |   |   |   |   |   |   RI >= 1.52 : headlamps (1/0)
+|   |   |   |   |   Na >= 13.62
+|   |   |   |   |   |   Si < 71.25 : build wind non-float (2/0)
+|   |   |   |   |   |   Si >= 71.25
+|   |   |   |   |   |   |   Si < 72.75
+|   |   |   |   |   |   |   |   Ba < 0.13
+|   |   |   |   |   |   |   |   |   Fe < 0.27
+|   |   |   |   |   |   |   |   |   |   Al < 0.65
+|   |   |   |   |   |   |   |   |   |   |   Na < 14.12
+|   |   |   |   |   |   |   |   |   |   |   |   Na < 13.88 : build wind float (1/0)
+|   |   |   |   |   |   |   |   |   |   |   |   Na >= 13.88 : vehic wind float (1/0)
+|   |   |   |   |   |   |   |   |   |   |   Na >= 14.12 : build wind float (3/0)
+|   |   |   |   |   |   |   |   |   |   Al >= 0.65 : build wind float (9/0)
+|   |   |   |   |   |   |   |   |   Fe >= 0.27 : vehic wind float (1/0)
+|   |   |   |   |   |   |   |   Ba >= 0.13 : vehic wind float (1/0)
+|   |   |   |   |   |   |   Si >= 72.75 : vehic wind float (2/0)
+|   |   |   Mg >= 3.87
+|   |   |   |   Si < 71.87
+|   |   |   |   |   RI < 1.52 : build wind float (1/0)
+|   |   |   |   |   RI >= 1.52 : vehic wind float (1/0)
+|   |   |   |   Si >= 71.87 : build wind non-float (6/0)
+|   |   Al >= 1.42
+|   |   |   Ca < 8.32
+|   |   |   |   Fe < 0.22
+|   |   |   |   |   Si < 72.97 : build wind non-float (20/0)
+|   |   |   |   |   Si >= 72.97
+|   |   |   |   |   |   Ca < 7.8 : build wind float (1/0)
+|   |   |   |   |   |   Ca >= 7.8 : build wind non-float (11/0)
+|   |   |   |   Fe >= 0.22
+|   |   |   |   |   RI < 1.52 : build wind float (2/0)
+|   |   |   |   |   RI >= 1.52 : build wind non-float (2/0)
+|   |   |   Ca >= 8.32
+|   |   |   |   Si < 72.5
+|   |   |   |   |   RI < 1.52 : vehic wind float (4/0)
+|   |   |   |   |   RI >= 1.52 : build wind non-float (1/0)
+|   |   |   |   Si >= 72.5
+|   |   |   |   |   RI < 1.52 : build wind non-float (4/0)
+|   |   |   |   |   RI >= 1.52
+|   |   |   |   |   |   Na < 12.88 : build wind float (2/0)
+|   |   |   |   |   |   Na >= 12.88
+|   |   |   |   |   |   |   RI < 1.52 : build wind float (1/0)
+|   |   |   |   |   |   |   RI >= 1.52 : build wind non-float (2/0)
+Ba >= 0.34
+|   RI < 1.52
+|   |   K < 1.57 : headlamps (23/0)
+|   |   K >= 1.57
+|   |   |   Al < 2.66 : headlamps (1/0)
+|   |   |   Al >= 2.66 : containers (1/0)
+|   RI >= 1.52
+|   |   RI < 1.52 : build wind float (1/0)
+|   |   RI >= 1.52
+|   |   |   Na < 12.54 : build wind non-float (1/0)
+|   |   |   Na >= 12.54 : headlamps (2/0)
+
+Size of the tree : 97
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances         150               70.0935 %
+Incorrectly Classified Instances        64               29.9065 %
+Kappa statistic                          0.5936
+Mean absolute error                      0.0854
+Root mean squared error                  0.2923
+Relative absolute error                 40.3512 %
+Root relative squared error             90.0687 %
+Total Number of Instances              214     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.757    0.139    0.726      0.757    0.741      0.612    0.809     0.629     build wind float
+                 0.697    0.159    0.707      0.697    0.702      0.540    0.769     0.600     build wind non-float
+                 0.471    0.051    0.444      0.471    0.457      0.409    0.710     0.251     vehic wind float
+                 0.000    0.000    0.000      0.000    0.000      0.000    ?         ?         vehic wind non-float
+                 0.846    0.025    0.688      0.846    0.759      0.746    0.911     0.591     containers
+                 0.444    0.020    0.500      0.444    0.471      0.450    0.712     0.246     tableware
+                 0.724    0.016    0.875      0.724    0.792      0.768    0.854     0.671     headlamps
+Weighted Avg.    0.701    0.111    0.705      0.701    0.701      0.593    0.795     0.576     
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g   <-- classified as
+ 53 11  6  0  0  0  0 |  a = build wind float
+ 13 53  4  0  2  2  2 |  b = build wind non-float
+  5  4  8  0  0  0  0 |  c = vehic wind float
+  0  0  0  0  0  0  0 |  d = vehic wind non-float
+  0  1  0  0 11  0  1 |  e = containers
+  0  4  0  0  1  4  0 |  f = tableware
+  2  2  0  0  2  2 21 |  g = headlamps
+

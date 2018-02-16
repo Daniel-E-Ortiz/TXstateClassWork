@@ -1,0 +1,14 @@
+http://cs.txstate.edu/~deo15/index.html
+
+Daniel Ortiz
+deo15
+04/06/2017
+
+The website works as you would expect except I was not able to implement the local search with Lucene like I wanted to. I also noticed that my website only alows 1 search to be done then must be refreshed. I'm not quite sure how I am supposed to fix that.
+
+My assignment was implemented inside the sublime text editor and what I did was first create the design with my name, class, assignment, and textbox/buttons. For the entirety of the websearch I referenced http://www.w3schools.com for all my basic HTML use, my XML data retrieval use, JavaScript, JSON parsing of the information, and Styling. This assignment was the first time I have coded using HTML or JavaScript or anything else previously mentioned. It took me many hours to just figure out how to start with a helloworld application and it finally turned into what I have created here in this assignment. As for how it works it simply takes the input from the searchBox and inputs that query into myWebSearchFunction(). Inside this function I grab the query and take the value of the query into another variable called content. 
+I then create a new XMLHTTPRequest and request the googleAPI with my engineID and key & content with asynchronous results. I parse the data from the response into an myObj then loop the output onto the same page from index 0 through 9 (10 results) with some formatting for readability.
+
+The second part of the assignment I was unable to complete so the button for local search does not respond with any output.
+
+As I wish I knew more about web programming and the language, I did enjoy researching and playing with tutorials online to achieve the final product I have in this Assignment. If I have the time I would like to learn more about HTML and JavaScript. 

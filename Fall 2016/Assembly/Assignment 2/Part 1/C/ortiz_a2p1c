@@ -1,0 +1,67 @@
+##########################################################################
+# Daniel Ortiz, CS 2318-002, Assignment 2 Part 1 Program C		 #
+##########################################################################
+# This program swaps 7 with 3 & 9 with 5 in the Array & outputs results  #
+############################ data segment ################################
+			.data
+intArr:			.word 7, 9, 3, 8, 5
+before:			.asciiz "Before swaps: "
+after:			.asciiz "After swaps: "
+
+			.text
+			.globl main
+############################ code segment ################################
+main:
+			li $v0, 4
+			la $a0, before
+			syscall
+			
+			# print before swaps
+			la $t0, intArr
+			lw $a0, 0($t0)
+			li $v0, 1
+			syscall
+			lw $a0, 4($t0)
+			syscall
+			lw $a0, 8($t0)
+			syscall
+			lw $a0, 12($t0)
+			syscall
+			lw $a0, 16($t0)
+			syscall
+			
+			# Swapping 
+			lw $t1, 0($t0)
+			lw $t2, 8($t0)
+			sw $t1, 8($t0)
+			sw $t2, 0($t0)
+						
+			lw $t1, 4($t0)
+			lw $t2, 16($t0)
+			sw $t1, 16($t0)
+			sw $t2, 4($t0)
+			
+			li $v0, 11
+			li $a0, '\n'
+			syscall
+			
+			li $v0, 4
+			la $a0, after
+			syscall
+			
+			# After swaps Printout
+			lw $a0, 0($t0)
+			li $v0, 1
+			syscall
+			lw $a0, 4($t0)
+			syscall
+			lw $a0, 8($t0)
+			syscall
+			lw $a0, 12($t0)
+			syscall
+			lw $a0, 16($t0)
+			syscall
+			
+			# exit
+			li $v0, 10
+			syscall

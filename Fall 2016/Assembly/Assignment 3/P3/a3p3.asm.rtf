@@ -1,0 +1,1115 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Courier New;}}
+{\*\generator Riched20 10.0.14393}\viewkind4\uc1 
+\pard\sl360\slmult1\f0\fs16\lang1033 ################################################################################\par
+# Name:    Daniel Ortiz\par
+# Class:   CS2318 - 002\par
+# Subject: Assignment 3 Part 3\par
+# Date:    12/08/2016 \par
+################################################################################\par
+#void PopulateArray1(char reply, int a1[], int* used1Ptr, int cap);\par
+#int  PopulateArray1223(int a1[], int a2[], int a3[], int used1, int* used2Ptr, int* used3Ptr);\par
+#void PopulateArray1223AuxO(int a3[], int* used3Ptr, int target);\par
+#void PopulateArray1223AuxE(int a2[], int* used2Ptr, int target);\par
+#void ProcArrays(int mean, int a1[], int a2[], int a3[], int used1, int* used2Ptr, int* used3Ptr);\par
+#void MergeCopy2321(int* used2Ptr, int a1[], int a2[], int a3[], int* used3Ptr);\par
+#void LtMeanGtMeanCopy1223(int mean, int a1[], int a2[], int a3[],\par
+#                          int used1, int* used2Ptr, int* used3Ptr);\par
+#void CoutCstr(const char cstr[]);\par
+#void CoutCstrNL(const char cstr[]);\par
+#void CoutOneInt(int oneInt);\par
+#void ShowArray(const int a[], int size);\par
+#void ShowArrayLabeled(const int array[], int used, const char label[]);\par
+#\par
+\tab\tab\tab\tab\tab .text\par
+\tab\tab\tab\tab\tab .globl main\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#int main()\par
+#\{\par
+###############################################################################\par
+main:\par
+#################\par
+# Register usage:\par
+#################\par
+# $t0: holder for a value/address\par
+# $t4: reply\par
+# $s0: mean\par
+# (usual ones for syscall & function call)\par
+#                   int a1[12],\par
+#                       a2[12],\par
+#                       a3[12];\par
+#                   char reply;\par
+#                   int used1,\par
+#                       used2,\par
+#                       used3,\par
+#                       mean;\par
+#                   char begA1Str[]  = "beginning a1: ";\par
+#                   char procA1Str[] = "processed a1: ";\par
+#                   char commA2Str[] = "          a2: ";\par
+#                   char commA3Str[] = "          a3: ";\par
+#                   char dacStr[]    = "Do another case? (n or N = no, others = yes) ";\par
+#                   char dlStr[]     = "================================";\par
+#                   char byeStr[]    = "bye...";\par
+\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab ####################(5)###################\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, -344\par
+\tab\tab\tab\tab\tab sw $ra, 340($sp)\par
+\tab\tab\tab\tab\tab sw $fp, 336($sp)\par
+\tab\tab\tab\tab\tab addiu $fp, $sp, 344\par
+\tab\tab\tab\tab\tab sw $s0, 28($sp)\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab j begDataInitM\tab\tab\tab # "clutter-reduction" jump\par
+endDataInitM:\par
+\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   cout << endl;\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab syscall\par
+#                   reply = 'y';\par
+\tab\tab\tab\tab\tab li $t4, 'y'\tab\tab\tab # $t4 is reply\par
+#                   goto WTest_m;\par
+\tab\tab\tab\tab\tab j WTest_m\par
+begW_m:\par
+#                      PopulateArray1(reply, a1, &used1, 12);\par
+\tab\tab\tab\tab\tab move $a0, $t4\par
+\tab\tab\tab\tab\tab addi $a1, $sp, 192\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 188\par
+\tab\tab\tab\tab\tab li $a3, 12\par
+\tab\tab\tab\tab\tab jal PopulateArray1\par
+#                      if (used1 <= 0) goto endI_m;\par
+\tab\tab\tab\tab\tab lw $t0, 188($sp)\tab\tab # $t0 has used1\par
+\tab\tab\tab\tab\tab blez $t0, endI_m\par
+begI_m:\par
+#                         cout << endl;\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab syscall\par
+#                         ShowArrayLabeled(a1, used1, begA1Str);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 192\par
+\tab\tab\tab\tab\tab lw $a1, 188($sp)\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 32\par
+\tab\tab\tab\tab\tab jal ShowArrayLabeled\par
+#                         mean = PopulateArray1223(a1, a2, a3, used1, &used2, &used3);\par
+\tab\tab\tab\tab\tab ####################(10)####################\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 192\par
+\tab\tab\tab\tab\tab addi $a1, $sp, 240\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 288\par
+\tab\tab\tab\tab\tab lw   $a3, 188($sp)\par
+\tab\tab\tab\tab\tab addi $t0, $sp, 184\par
+\tab\tab\tab\tab\tab sw   $t0, 16($sp)\par
+\tab\tab\tab\tab\tab addi $t0, $sp, 180\par
+\tab\tab\tab\tab\tab sw   $t0, 20($sp)\par
+\tab\tab\tab\tab\tab jal PopulateArray1223\par
+\tab\tab\tab\tab\tab sw $v0 28($sp)\par
+#                         ShowArrayLabeled(a2, used2, commA2Str);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 240\par
+\tab\tab\tab\tab\tab lw   $a1, 184($sp)\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 62\par
+\tab\tab\tab\tab\tab jal ShowArrayLabeled\par
+#                         ShowArrayLabeled(a3, used3, commA3Str);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 288\par
+\tab\tab\tab\tab\tab lw   $a1, 180($sp)\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 77\par
+\tab\tab\tab\tab\tab jal ShowArrayLabeled\par
+#                         ProcArrays(mean, a1, a2, a3, used1, &used2, &used3);\par
+\tab\tab\tab\tab\tab ####################(10)####################\par
+\tab\tab\tab\tab\tab lw   $a0, 28($sp)    # mean arg1\par
+\tab\tab\tab\tab\tab addi $a1, $sp, 192   # a1   arg2  \par
+\tab\tab\tab\tab\tab addi $a2, $sp, 240   # a2   arg3\par
+\tab\tab\tab\tab\tab addi $a3, $sp, 288   # a3   arg4\par
+\tab\tab\tab\tab\tab lw   $t0, 188($sp)   # used1 value \par
+\tab\tab\tab\tab\tab sw   $t0,  16($sp)   # arg5\par
+\tab\tab\tab\tab\tab addi $t0, $sp, 184   # &used2 ref\par
+\tab\tab\tab\tab\tab sw   $t0,  20($sp)   # arg 6\par
+\tab\tab\tab\tab\tab addi $t0, $sp, 180   # &used3 ref\par
+\tab\tab\tab\tab\tab sw   $t0,  24($sp)   # arg 7\tab\tab\tab\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab jal ProcArrays\par
+#                         ShowArrayLabeled(a1, used1, procA1Str);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 192\par
+\tab\tab\tab\tab\tab lw $a1, 188($sp)\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 47\par
+\tab\tab\tab\tab\tab jal ShowArrayLabeled\par
+#                         ShowArrayLabeled(a2, used2, commA2Str);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 240\par
+\tab\tab\tab\tab\tab lw $a1, 184($sp)\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 62\par
+\tab\tab\tab\tab\tab jal ShowArrayLabeled\par
+#                         ShowArrayLabeled(a3, used3, commA3Str);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 288\par
+\tab\tab\tab\tab\tab lw $a1, 180($sp)\par
+\tab\tab\tab\tab\tab addi $a2, $sp, 77\par
+\tab\tab\tab\tab\tab jal ShowArrayLabeled\par
+endI_m:\par
+#                      cout << endl;\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab syscall\par
+#                      cout << dacStr;\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 92\par
+\tab\tab\tab\tab\tab jal CoutCstr\par
+#                      cin >> reply;\par
+\tab\tab\tab\tab\tab li $v0, 12\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab move $t4, $v0\tab\tab            # $t4 is reply\tab\tab\tab\tab\tab\par
+#                      cout << endl;\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab syscall\par
+WTest_m:\par
+#                   if (reply == 'n') goto xitW_m;\par
+\tab\tab\tab\tab\tab li $t0, 'n'\par
+\tab\tab\tab\tab\tab beq $t4, $t0, xitW_m\par
+#                   if (reply != 'N') goto begW_m;\par
+\tab\tab\tab\tab\tab li $t0, 'N'\par
+\tab\tab\tab\tab\tab bne $t4, $t0, begW_m\par
+xitW_m:\par
+#                   CoutCstrNL(dlStr);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 138\par
+\tab\tab\tab\tab\tab jal CoutCstrNL\tab\tab\tab\tab\tab\par
+#                   CoutCstrNL(byeStr);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 171\par
+\tab\tab\tab\tab\tab jal CoutCstrNL\tab\tab\tab\tab\tab\par
+#                   CoutCstrNL(dlStr);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 138\par
+\tab\tab\tab\tab\tab jal CoutCstrNL\tab\tab\tab\tab\tab\par
+\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab ####################(4)####################\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab lw    $s0, 28($sp)\par
+\tab\tab\tab\tab\tab lw    $fp, 336($sp)\par
+\tab\tab\tab\tab\tab lw    $ra, 340($sp)\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, 344\par
+#                   return 0;\par
+#\}\par
+\tab\tab\tab\tab\tab li $v0, 10\par
+\tab\tab\tab\tab\tab syscall\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void PopulateArray1(char reply, int a1[], int* used1Ptr, int cap)\par
+#                         $a0        $a1        $a2           $a3\par
+#\{\par
+###############################################################################\par
+PopulateArray1:\par
+#################\par
+# Register usage:\par
+#################\par
+# $t0: holder for a value/address\par
+# $t1: another holder for a value/address\par
+# $t2: yet another holder for a value/address\par
+# $a0: reply (initial value received as arg1)\par
+# (usual ones for syscall & function call)\par
+###############################################################################\par
+#                   char einStr[] = "Enter integer #";\par
+#                   char moStr[]  = "Max of ";\par
+#                   char ieStr[]  = " ints entered...";\par
+#                   char emiStr[] = "Enter more ints? (n or N = no, others = yes) ";\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, -112\par
+\tab\tab\tab\tab\tab sw $ra, 108($sp)\par
+\tab\tab\tab\tab\tab sw $fp, 104($sp)\par
+\tab\tab\tab\tab\tab addiu $fp, $sp, 112\par
+\tab\tab\tab\tab\tab j begDataInitPA1\par
+\tab\tab\tab\tab\tab # "clutter-reduction" jump\par
+endDataInitPA1:\par
+\tab\tab\tab\tab\tab sw $a1, 4($fp)\tab\par
+\tab\tab\tab\tab\tab # a1 as received saved in caller's frame\par
+\tab\tab\tab\tab\tab sw $a2, 8($fp)\tab  \par
+\tab\tab\tab\tab\tab # used1Ptr as received saved in caller's frame\par
+\tab\tab\tab\tab\tab sw $a3, 12($fp)\tab\tab\tab\tab\tab # cap as received saved in caller's frame\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   *used1Ptr = 0;\par
+\tab\tab\tab\tab\tab sw $0, 0($a2)\tab # $a2 still has used1Ptr as received\par
+#                   goto WTest_PA1;\par
+\tab\tab\tab\tab\tab j WTest_PA1\par
+begW_PA1:\par
+#                      CoutCstr(einStr);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 16\par
+\tab\tab\tab\tab\tab jal CoutCstr\par
+#                      CoutOneInt(*used1Ptr + 1);\par
+\tab\tab\tab\tab\tab lw $a2, 8($fp)\tab  # used1Ptr as received re-loaded into $a2\par
+\tab\tab\tab\tab\tab  \tab\tab  # CoutCstr might have clobbered $a2 \par
+\tab\tab\tab\tab\tab lw $a0, 0($a2)\tab   # $a0 has *used1Ptr\par
+\tab\tab\tab\tab\tab addi $a0, $a0, 1 # *used1Ptr + 1 as arg1\par
+\tab\tab\tab\tab\tab jal CoutOneInt\par
+#                      cout << ':' << ' ';\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab li $a0, ':'\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab li $a0, ' '\par
+\tab\tab\tab\tab\tab syscall\par
+#                      cin >> a1[*used1Ptr];\par
+\tab\tab\tab\tab\tab li $v0, 5\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab syscall\tab        \tab  # $v0 has user-entered int\par
+\tab\tab\tab\tab\tab lw $a1, 4($fp)\tab  # a1 as received re-loaded into $a1\par
+\tab\tab\tab\tab\tab lw $a2, 8($fp)\tab  # used1Ptr as received re-loaded into $a2\par
+\tab\tab\tab\tab\tab lw $a3, 12($fp)\tab\tab\tab\tab\tab # cap as received re-loaded into $a3\par
+\tab # CoutOneInt might have clobbered $a1, $a2 & $a3\par
+\tab\tab\tab\tab\tab lw $t1, 0($a2)\tab    # $t1 has *used1Ptr\par
+\tab\tab\tab\tab\tab sll $t2, $t1, 2\tab\tab\tab\tab\tab # $t2 has (*used1Ptr) * 4\par
+\tab\tab\tab\tab\tab add $t2, $t2, $a1 # $t2 has &a1[*used1Ptr]\par
+\tab\tab\tab\tab\tab sw $v0, 0($t2)\par
+#                      ++(*used1Ptr);\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 1  # $t1 has *used1Ptr + 1\par
+\tab\tab\tab\tab\tab sw $t1, 0($a2)\par
+#                      if (*used1Ptr != cap) goto else_PA1;\par
+\tab\tab\tab\tab\tab bne $t1, $a3, else_PA1\tab\tab\tab\tab # $t1 still has up-to-date *used1Ptr\par
+begI_PA1:\par
+#                         CoutCstr(moStr);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 32\par
+\tab\tab\tab\tab\tab jal CoutCstr\par
+#                         CoutOneInt(cap);\par
+\tab\tab\tab\tab\tab lw $a0, 12($fp)\tab\tab\tab\tab\tab # cap as received loaded into $a0\par
+\tab # not using $a3 as CoutCstr might have clobbered it\par
+\tab\tab\tab\tab\tab jal CoutOneInt\par
+#                         CoutCstr(ieStr);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 86\par
+\tab\tab\tab\tab\tab jal CoutCstr\par
+#                         cout << endl;\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab syscall\par
+#                         reply = 'n';\par
+\tab\tab\tab\tab\tab li $a0, 'n'\tab   # $a0 is reply\par
+#                      goto endI_PA1;\par
+\tab\tab\tab\tab\tab j endI_PA1\par
+ else_PA1:\par
+#                         CoutCstr(emiStr);\par
+\tab\tab\tab\tab\tab addi $a0, $sp, 40\par
+\tab\tab\tab\tab\tab jal CoutCstr\par
+#                         cin >> reply;\par
+\tab\tab\tab\tab\tab li $v0, 12\par
+\tab\tab\tab\tab\tab syscall\par
+#\tab\tab\tab\tab\tab move $a0, $v0\tab   # $a0 is reply\par
+\tab\tab\tab\tab\tab sw $v0, 0($fp)\tab   # reply saved in caller's frame\par
+\tab\tab\tab\tab\tab # newline to offset shortcoming of syscall #12\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab lw $a0, 0($fp)\tab   # retrieve reply saved previously\par
+endI_PA1:\par
+WTest_PA1:\par
+#                   if (reply == 'n') goto xitW_PA1;\par
+\tab\tab\tab\tab\tab li $t0, 'n'\par
+\tab\tab\tab\tab\tab beq $a0, $t0, xitW_PA1\par
+#                   if (reply != 'N') goto begW_PA1;\par
+\tab\tab\tab\tab\tab li $t0, 'N'\par
+\tab\tab\tab\tab\tab bne $a0, $t0, begW_PA1\par
+xitW_PA1:\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab lw $fp, 104($sp)\par
+\tab\tab\tab\tab\tab lw $ra, 108($sp)\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, 112  \par
+#                   return;\par
+#\}\par
+#########################################\par
+# deliberate clobbering of caller-saved\par
+# (meant to catch improper presumptions -\par
+# no effect if no such presumptions made)\par
+#########################################\par
+\tab\tab\tab li $a0, 999999999\par
+\tab\tab\tab li $a1, 999999999\par
+\tab\tab\tab li $a2, 999999999\par
+\tab\tab\tab li $a3, 999999999\par
+\tab\tab\tab li $t0, 999999999\par
+\tab\tab\tab li $t1, 999999999\par
+\tab\tab\tab li $t2, 999999999\par
+\tab\tab\tab li $t3, 999999999\par
+\tab\tab\tab li $t4, 999999999\par
+\tab\tab\tab li $t5, 999999999\par
+\tab\tab\tab li $t6, 999999999\par
+\tab\tab\tab li $t7, 999999999\par
+\tab\tab\tab li $t8, 999999999\par
+\tab\tab\tab li $t9, 999999999\par
+\tab\tab\tab li $v0, 999999999\par
+\tab\tab\tab li $v1, 999999999\par
+#########################################\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#int PopulateArray1223(int a1[], int a2[], int a3[], int used1, int* used2Ptr, int* used3Ptr)\par
+#\{\par
+###############################################################################\par
+PopulateArray1223:\par
+#################\par
+# Register usage:\par
+#################\par
+# $s0: total\par
+# $t0: target\par
+# $t1: hopPtr1\par
+# $t9: endPtr1\par
+# $v1: holder for a value/address\par
+# (usual ones for function call)\par
+# $a0: a1\par
+# $a1: a2\par
+# $a2: a3 \par
+# $a3: used1\par
+# 16($fp): used2Ptr\par
+# 20($fp): used3Ptr\par
+###############################################################################\par
+\tab\tab\tab\tab\tab ####################(47)####################\tab\tab\tab\tab\tab\par
+#                   int target,\par
+#                       total,\par
+#                       *hopPtr1,\par
+#                       *endPtr1;\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, -40\par
+\tab\tab\tab\tab\tab sw    $ra, 36($sp)\par
+\tab\tab\tab\tab\tab sw    $fp, 32($sp)\par
+\tab\tab\tab\tab\tab addiu $fp, $sp, 40\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab sw $a0, 0($fp)\par
+\tab\tab\tab\tab\tab sw $a1, 4($fp)\tab\tab\par
+\tab\tab\tab\tab\tab sw $a2, 8($fp)\par
+\tab\tab\tab\tab\tab sw $a3, 12($fp)\par
+\tab\tab\tab\tab\tab sw $s0, 16($sp)\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   *used2Ptr = 0;\par
+\tab\tab\tab\tab\tab lw $v1, 16($fp)\par
+\tab\tab\tab\tab\tab sw $0,   0($v1)\par
+#                   *used3Ptr = 0;\par
+\tab\tab\tab\tab\tab lw $v1, 20($fp)\par
+\tab\tab\tab\tab\tab sw $0,   0($v1)\par
+#                   total = 0;\par
+\tab\tab\tab\tab\tab li $s0, 0\par
+#                   hopPtr1 = a1;\par
+\tab\tab\tab\tab\tab move $t1, $a0\par
+#                   endPtr1 = a1 + used1;\par
+\tab\tab\tab\tab\tab sll $v1, $a3, 2 \par
+\tab\tab\tab\tab\tab add $t9, $a0, $v1\par
+#                   goto FTest_PA1223;\par
+\tab\tab\tab\tab\tab j FTest_PA1223\par
+begF_PA1223:\par
+#                      target = *hopPtr1;\par
+\tab\tab\tab\tab\tab lw $t0,  0($t1)\par
+#                      total += target; \par
+\tab\tab\tab\tab\tab add $s0, $s0, $t0\par
+#                      if (target % 2 == 0) goto else_PA1223;\par
+\tab\tab\tab\tab\tab andi $v1, $t0, 1\par
+\tab\tab\tab\tab\tab beqz $v1, else_PA1223\par
+begI_PA1223:\par
+#                         PopulateArray1223AuxO(a3, used3Ptr, target);\par
+\tab\tab\tab\tab\tab move $a0, $a2\par
+\tab\tab\tab\tab\tab lw   $a1, 20($fp)\par
+\tab\tab\tab\tab\tab move $a2, $t0\par
+\tab\tab\tab\tab\tab sw   $t1, 24($sp)\par
+\tab\tab\tab\tab\tab sw   $t9, 28($sp)\par
+\tab\tab\tab\tab\tab jal PopulateArray1223AuxO\par
+#                      goto endI_PA1223;\par
+\tab\tab\tab\tab\tab j endI_PA1223\par
+else_PA1223:\par
+#                         PopulateArray1223AuxE(a2, used2Ptr, target);\par
+\tab\tab\tab\tab\tab # $a1, 16($fp), $t0\par
+\tab\tab\tab\tab\tab move $a0, $a1\par
+\tab\tab\tab\tab\tab lw   $a1, 16($fp)\par
+\tab\tab\tab\tab\tab move $a2, $t0\par
+\tab\tab\tab\tab\tab sw   $t1, 24($sp)\par
+\tab\tab\tab\tab\tab sw   $t9, 28($sp)\par
+\tab\tab\tab\tab\tab jal PopulateArray1223AuxE\par
+endI_PA1223:\par
+\tab\tab\tab\tab\tab lw $t1, 24($sp)\par
+\tab\tab\tab\tab\tab lw $t9, 28($sp)\par
+\tab\tab\tab\tab\tab lw $a0, 0($fp)\par
+\tab\tab\tab\tab\tab lw $a1, 4($fp)\par
+\tab\tab\tab\tab\tab lw $a2, 8($fp)\par
+#                   ++hopPtr1;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 4\par
+FTest_PA1223:\par
+#                   if (hopPtr1 < endPtr1) goto begF_PA1223;\par
+\tab\tab\tab\tab\tab blt $t1, $t9, begF_PA1223\par
+#                   return total/used1;\par
+\tab\tab\tab\tab\tab div  $v0, $s0, $a3\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab lw    $s0, 16($sp)\par
+\tab\tab\tab\tab\tab lw    $fp, 32($sp)\par
+\tab\tab\tab\tab\tab lw    $ra, 36($sp)\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, 40\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab jr $ra\par
+#\}\tab\tab\tab\tab\tab\tab\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void PopulateArray1223AuxO(int a3[], int* used3Ptr, int target)\par
+#\{\par
+###############################################################################\par
+PopulateArray1223AuxO:\par
+#################\par
+# Register usage:\par
+#################\par
+# $t1: hopPtr3\par
+# $t9: endPtr3\par
+# $v1: holder for a value/address\par
+# $a0: a3[]\par
+# $a1: used3Ptr\par
+# $a2: target\par
+###############################################################################\par
+\tab\tab\tab\tab\tab ####################(18)####################\tab\tab\tab\tab\tab\par
+#                   int *hopPtr3,\par
+#                       *endPtr3;\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab # no stack frame needed\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   hopPtr3 = a3 + *used3Ptr - 1;\par
+\tab\tab\tab\tab\tab lw   $v1, 0($a1)\par
+\tab\tab\tab\tab\tab addi $v1, $v1, -1\par
+\tab\tab\tab\tab\tab sll  $v1, $v1, 2\par
+\tab\tab\tab\tab\tab add  $t1, $a0, $v1\par
+#                   endPtr3 = a3;\par
+\tab\tab\tab\tab\tab move $t9, $a0\par
+#                   goto WTest_PA1223AO;\par
+\tab\tab\tab\tab\tab j WTest_PA1223AO\par
+begW_PA1223AO:\par
+#                      if (*hopPtr3 <= target) goto else_PA1223AO;\par
+\tab\tab\tab\tab\tab lw  $v1, 0($t1)\par
+\tab\tab\tab\tab\tab ble $v1, $a2, else_PA1223AO\par
+begI_PA1223AO:\par
+#                         *(hopPtr3 + 1) = *hopPtr3;\par
+\tab\tab\tab\tab\tab lw $v1, 0($t1)\par
+\tab\tab\tab\tab\tab sw $v1, 4($t1)\par
+#                         --hopPtr3;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, -4\par
+#                      goto endI_PA1223AO;\par
+\tab\tab\tab\tab\tab j endI_PA1223AO\par
+else_PA1223AO:\par
+#                         goto xitW_PA1223AO;\par
+\tab\tab\tab\tab\tab j xitW_PA1223AO\par
+endI_PA1223AO:\par
+WTest_PA1223AO:\par
+#                   if (hopPtr3 >= endPtr3) goto begW_PA1223AO;\par
+\tab\tab\tab\tab\tab bge $t1, $t9, begW_PA1223AO\par
+xitW_PA1223AO:\par
+#                   *(hopPtr3 + 1) = target;\par
+\tab\tab\tab\tab\tab sw $a2, 4($t1)\par
+#                   ++(*used3Ptr);\par
+\tab\tab\tab\tab\tab lw   $v1, 0($a1)\par
+\tab\tab\tab\tab\tab addi $v1, $v1, 1\par
+\tab\tab\tab\tab\tab sw   $v1, 0($a1)\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab jr $ra\par
+#\}\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void PopulateArray1223AuxE(int a2[], int* used2Ptr, int target)\par
+#\{\par
+###############################################################################\par
+PopulateArray1223AuxE:\par
+#################\par
+# Register usage:\par
+#################\par
+# $s0: hopPtr21\par
+# $t1: hopPtr2\par
+# $t9: endPtr2\par
+# $v1: holder for a value/address\par
+# $a0: a2[]\par
+# $a1: *used2Ptr\par
+# $a2: target\par
+###############################################################################\par
+\tab\tab\tab\tab\tab ####################(30)####################\tab\tab\tab\tab\tab\par
+#                   int *hopPtr2,\par
+#                       *hopPtr21,\par
+#                       *endPtr2;\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, -32\par
+\tab\tab\tab\tab\tab sw    $ra, 28($sp)\par
+\tab\tab\tab\tab\tab sw    $fp, 24($sp)\par
+\tab\tab\tab\tab\tab addiu $fp, $sp, 32\par
+\tab\tab\tab\tab\tab sw $s0, 0($sp)\par
+\tab\tab\tab\tab\tab # BODY:\par
+\tab\tab\tab\tab\tab sw $a0, 0($fp)\par
+\tab\tab\tab\tab\tab sw $a1, 4($fp)\par
+\tab\tab\tab\tab\tab sw $a2, 8($fp)\par
+#                   hopPtr2 = a2;\par
+\tab\tab\tab\tab\tab move $t1, $a0\par
+#                   endPtr2 = a2 + *used2Ptr;\par
+\tab\tab\tab\tab\tab lw $v1, 0($a1)\par
+\tab\tab\tab\tab\tab sll $v1, $v1, 2\par
+\tab\tab\tab\tab\tab add $t9, $a0, $v1\par
+#                   goto WTest1_PA1223AE;\par
+\tab\tab\tab\tab\tab j WTest1_PA1223AE\par
+begW1_PA1223AE:\par
+#                      if (*hopPtr2 < target) goto else_PA1223AE;\par
+\tab\tab\tab\tab\tab lw  $v1, 0($t1)\par
+\tab\tab\tab\tab\tab blt $v1, $a2, else_PA1223AE\par
+begI_PA1223AE:\par
+#                         hopPtr21 = endPtr2;\par
+\tab\tab\tab\tab\tab move $s0, $t9\par
+#                         goto WTest2_PA1223AE;\par
+\tab\tab\tab\tab\tab j WTest2_PA1223AE\par
+begW2_PA1223AE:\par
+#                            *hopPtr21 = *(hopPtr21 - 1);\par
+\tab\tab\tab\tab\tab lw $v1, -4($s0)\par
+\tab\tab\tab\tab\tab sw $v1,  0($s0)\par
+#                            --hopPtr21;\par
+\tab\tab\tab\tab\tab addi $s0, $s0, -4\par
+WTest2_PA1223AE:\par
+#                         if (hopPtr21 > hopPtr2) goto begW2_PA1223AE;\par
+\tab\tab\tab\tab\tab bgt $s0, $t1, begW2_PA1223AE\par
+#                         goto xitW1_PA1223AE;\par
+\tab\tab\tab\tab\tab j xitW1_PA1223AE\par
+else_PA1223AE:\tab\tab\tab\par
+#                         ++hopPtr2;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 4\par
+endI_PA1223AE:\par
+WTest1_PA1223AE:\par
+#                   if (hopPtr2 < endPtr2) goto begW1_PA1223AE;\par
+\tab\tab\tab\tab\tab blt $t1, $t9, begW1_PA1223AE\par
+xitW1_PA1223AE:\par
+#                   *hopPtr2 = target;\par
+\tab\tab\tab\tab\tab sw $a2, 0($t1)\par
+#                   ++(*used2Ptr);\par
+\tab\tab\tab\tab\tab lw   $v1, 0($a1)\par
+\tab\tab\tab\tab\tab addi $v1,   $v1, 1\par
+\tab\tab\tab\tab\tab sw   $v1, 0($a1)\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab lw $s0,  0($sp)\par
+\tab\tab\tab\tab\tab lw $fp, 24($sp)\par
+\tab\tab\tab\tab\tab lw $ra, 28($sp)\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, 32\par
+\tab\tab\tab\tab\tab jr $ra\par
+#\}\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void ProcArrays(int mean, int a1[], int a2[], int a3[], int used1, int* used2Ptr, int* used3Ptr)\par
+#\{\par
+###############################################################################\par
+ProcArrays:\par
+#################\par
+# Register usage:\par
+#################\par
+# $v1: holder for a value/address\par
+# (usual ones for function call)\par
+###############################################################################\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, -40\par
+\tab\tab\tab\tab\tab sw $ra, 36($sp)\par
+\tab\tab\tab\tab\tab sw $fp, 32($sp)\par
+\tab\tab\tab\tab\tab addiu $fp, $sp, 40\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab ####################(4)####################\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab sw $a0,  0($fp)\par
+\tab\tab\tab\tab\tab sw $a1,  4($fp)\par
+\tab\tab\tab\tab\tab sw $a2,  8($fp)\par
+\tab\tab\tab\tab\tab sw $a3, 12($fp)\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   MergeCopy2321(used2Ptr, a1, a2, a3, used3Ptr);\par
+\tab\tab\tab\tab\tab ####################(3)####################\par
+\tab\tab\tab\tab\tab lw $a0, 20($fp)\par
+\tab\tab\tab\tab\tab lw $v1, 24($fp)\par
+\tab\tab\tab\tab\tab sw $v1, 16($sp)\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab jal MergeCopy2321\par
+#                   LtMeanGtMeanCopy1223(mean, a1, a2, a3, used1, used2Ptr, used3Ptr);\par
+\tab\tab\tab\tab\tab ####################(10)####################\par
+\tab\tab\tab\tab\tab lw $a0,  0($fp)\par
+\tab\tab\tab\tab\tab lw $a1,  4($fp)\par
+\tab\tab\tab\tab\tab lw $a2,  8($fp)\par
+\tab\tab\tab\tab\tab lw $a3, 12($fp)\par
+\tab\tab\tab\tab\tab lw $v1, 16($fp)\par
+\tab\tab\tab\tab\tab sw $v1, 16($sp)\par
+\tab\tab\tab\tab\tab lw $v1, 20($fp)\par
+\tab\tab\tab\tab\tab sw $v1, 20($sp)\par
+\tab\tab\tab\tab\tab lw $v1, 24($fp)\par
+\tab\tab\tab\tab\tab sw $v1, 24($sp)\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab jal LtMeanGtMeanCopy1223\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab lw $fp, 32($sp)\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab lw $ra, 36($sp)\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, 40  \par
+#\}\par
+#########################################\par
+# deliberate clobbering of caller-saved\par
+# (meant to catch improper presumptions -\par
+# no effect if no such presumptions made)\par
+#########################################\par
+\tab\tab\tab li $a0, 999999999\par
+\tab\tab\tab li $a1, 999999999\par
+\tab\tab\tab li $a2, 999999999\par
+\tab\tab\tab li $a3, 999999999\par
+\tab\tab\tab li $t0, 999999999\par
+\tab\tab\tab li $t1, 999999999\par
+\tab\tab\tab li $t2, 999999999\par
+\tab\tab\tab li $t3, 999999999\par
+\tab\tab\tab li $t4, 999999999\par
+\tab\tab\tab li $t5, 999999999\par
+\tab\tab\tab li $t6, 999999999\par
+\tab\tab\tab li $t7, 999999999\par
+\tab\tab\tab li $t8, 999999999\par
+\tab\tab\tab li $t9, 999999999\par
+\tab\tab\tab li $v0, 999999999\par
+\tab\tab\tab li $v1, 999999999\par
+#########################################\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void MergeCopy2321(int* used2Ptr, int a1[], int a2[], int a3[], int* used3Ptr)\par
+#                        $a0           $a1       $a2       $a3        16($sp)\par
+#\{\par
+###############################################################################\par
+MergeCopy2321:\par
+#################\par
+# Register usage:\par
+#################\par
+# $t0: holder for a value/address\par
+# $t1: hopPtr1\par
+# $t2: hopPtr2\par
+# $t3: hopPtr3\par
+# $t8: endPtr2\par
+# $t9: endPtr3\par
+# $v1: another holder for a value/address\par
+###############################################################################\par
+\tab\tab\tab\tab\tab ####################(35)####################\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\par
+#                   int *hopPtr1,\par
+#                       *hopPtr2,\par
+#                       *hopPtr3,\par
+#                       *endPtr2,\par
+#                       *endPtr3;\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab  \tab\tab\tab # no stack frame needed\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   hopPtr1 = a1;\par
+\tab\tab\tab\tab\tab move $t1, $a1\par
+#                   hopPtr2 = a2;\par
+\tab\tab\tab\tab\tab move $t2, $a2\par
+#                   hopPtr3 = a3;\par
+\tab\tab\tab\tab\tab move $t3, $a3\par
+#                   endPtr2 = a2 + *used2Ptr;\par
+\tab\tab\tab\tab\tab lw  $v1, 0($a0)\par
+\tab\tab\tab\tab\tab sll $v1, $v1, 2\par
+\tab\tab\tab\tab\tab add $t8, $a2, $v1\par
+#                   endPtr3 = a3 + *used3Ptr;\par
+\tab\tab\tab\tab\tab lw $v1, 16($sp)\par
+\tab\tab\tab\tab\tab lw $t0, 0($v1)\par
+\tab\tab\tab\tab\tab sll $t0, $t0, 2\par
+\tab\tab\tab\tab\tab add $t9, $a3, $t0\par
+#                   goto WTest1_MC2321;\par
+\tab\tab\tab\tab\tab j WTest1_MC2321\par
+begW1_MC2321:\par
+#                      if (*hopPtr2 >= *hopPtr3) goto else_MC2321;\par
+\tab\tab\tab\tab\tab lw $t0, 0($t2)\par
+\tab\tab\tab\tab\tab lw $v1, 0($t3)\par
+\tab\tab\tab\tab\tab bge $t0, $v1, else_MC2321\par
+begI_MC2321:\par
+#                         *hopPtr1 = *hopPtr2;\par
+\tab\tab\tab\tab\tab lw $v1, 0($t2)\par
+\tab\tab\tab\tab\tab sw $v1, 0($t1)\par
+#                         ++hopPtr2;\par
+\tab\tab\tab\tab\tab addi $t2, $t2, 4\par
+#                      goto endI_MC2321;\par
+\tab\tab\tab\tab\tab j endI_MC2321\par
+else_MC2321:\par
+#                         *hopPtr1 = *hopPtr3;\par
+\tab\tab\tab\tab\tab lw $v1, 0($t3)\par
+\tab\tab\tab\tab\tab sw $v1, 0($t1)\par
+#                         ++hopPtr3;\par
+\tab\tab\tab\tab\tab addi $t3, $t3, 4\par
+endI_MC2321:\par
+#                      ++hopPtr1;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 4 \par
+WTest1_MC2321:\par
+#                   if (hopPtr2 >= endPtr2) goto xitW1_MC2321;\par
+\tab\tab\tab\tab\tab bge $t2, $t8, xitW1_MC2321\par
+#                   if (hopPtr3 < endPtr3) goto begW1_MC2321;\par
+\tab\tab\tab\tab\tab blt $t3, $t9, begW1_MC2321\par
+xitW1_MC2321:\tab\tab\tab\tab\tab\par
+#                   goto WTest2_MC2321;\par
+\tab\tab\tab\tab\tab j WTest2_MC2321\par
+begW2_MC2321:\par
+#                      *hopPtr1 = *hopPtr2;\par
+\tab\tab\tab\tab\tab lw $v1, 0($t2)\par
+\tab\tab\tab\tab\tab sw $v1, 0($t1)\par
+#                      ++hopPtr2;\par
+\tab\tab\tab\tab\tab addi $t2, $t2, 4\par
+#                      ++hopPtr1;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 4\par
+WTest2_MC2321:\par
+#                   if (hopPtr2 < endPtr2) goto begW2_MC2321;\par
+\tab\tab\tab\tab\tab blt $t2, $t8, begW2_MC2321\par
+#                   goto WTest3_MC2321;\par
+\tab\tab\tab\tab\tab j WTest3_MC2321\par
+begW3_MC2321:\par
+#                      *hopPtr1 = *hopPtr3;\par
+\tab\tab\tab\tab\tab lw $v1, 0($t3)\par
+\tab\tab\tab\tab\tab sw $v1, 0($t1)\par
+#                      ++hopPtr3;\par
+\tab\tab\tab\tab\tab addi $t3, $t3, 4\par
+#                      ++hopPtr1;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 4\tab\par
+WTest3_MC2321:\par
+#                   if (hopPtr3 < endPtr3) goto begW3_MC2321;\par
+\tab\tab\tab\tab\tab blt $t3, $t9, begW3_MC2321\par
+#\}\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void LtMeanGtMeanCopy1223(int mean, int a1[], int a2[], int a3[], \par
+#                          int used1, int* used2Ptr, int* used3Ptr)\par
+#\{\par
+###############################################################################\par
+LtMeanGtMeanCopy1223:\par
+#################\par
+# Register usage:\par
+#################\par
+# $t0: holder for a value/address\par
+# $t1: hopPtr1\par
+# $t2: hopPtr2\par
+# $t3: hopPtr3\par
+# $t5: target\par
+# $t9: endPtr1\par
+# $v1: holder for a value/address\par
+###############################################################################\par
+\tab\tab\tab\tab\tab ####################(30)####################\tab\tab\tab\tab\tab\par
+#                   int *hopPtr1,\par
+#                       *hopPtr2,\par
+#                       *hopPtr3,\par
+#                       *endPtr1;\par
+#                   int target;\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab  \tab\tab\tab\tab\tab\tab # no stack frame needed\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   hopPtr1 = a1;\par
+\tab\tab\tab\tab\tab move $t1, $a1\par
+#                   hopPtr2 = a2;\par
+\tab\tab\tab\tab\tab move $t2, $a2\par
+#                   hopPtr3 = a3;\par
+\tab\tab\tab\tab\tab move $t3, $a3\par
+#                   endPtr1 = a1 + used1;\par
+\tab\tab\tab\tab\tab lw  $v1, 16($sp)\par
+\tab\tab\tab\tab\tab sll $v1, $v1, 2\par
+\tab\tab\tab\tab\tab add $t9, $a1, $v1\par
+#                   *used2Ptr = 0;\par
+\tab\tab\tab\tab\tab lw $v1, 20($sp)\par
+\tab\tab\tab\tab\tab sw $0, 0($v1)\par
+#                   *used3Ptr = 0;\par
+\tab\tab\tab\tab\tab lw $v1, 24($sp)\par
+\tab\tab\tab\tab\tab sw $0, 0($v1)\par
+#                   goto WTest_LMGMC1223;\par
+\tab\tab\tab\tab\tab j WTest_LMGMC1223\par
+begW_LMGMC1223:\par
+#                      target = *hopPtr1;\par
+\tab\tab\tab\tab\tab lw $t5, 0($t1)\par
+#                      if (target >= mean) goto else1_LMGMC1223;\par
+\tab\tab\tab\tab\tab bge $t5, $a0, else1_LMGMC1223\par
+begI1_LMGMC1223:\par
+#                         *hopPtr2 = target;\par
+\tab\tab\tab\tab\tab sw $t5, 0($t2)\par
+#                         ++(*used2Ptr);\par
+\tab\tab\tab\tab\tab lw   $v1, 20($sp)\par
+\tab\tab\tab\tab\tab lw   $t0,  0($v1)\par
+\tab\tab\tab\tab\tab addi $t0, $t0, 1\par
+\tab\tab\tab\tab\tab sw   $t0, 0($v1)\par
+#                         ++hopPtr2;\par
+\tab\tab\tab\tab\tab addi $t2, $t2, 4\par
+#                      goto endI1_LMGMC1223;\par
+\tab\tab\tab\tab\tab j endI1_LMGMC1223\par
+else1_LMGMC1223:\par
+#                         if (target <= mean) goto endI2_LMGMC1223;\par
+\tab\tab\tab\tab\tab ble $t5, $a0, endI2_LMGMC1223\par
+begI2_LMGMC1223:\par
+#                            *hopPtr3 = target;\par
+\tab\tab\tab\tab\tab sw $t5, 0($t3)\par
+#                            ++(*used3Ptr);\par
+\tab\tab\tab\tab\tab lw   $v1, 24($sp)\par
+\tab\tab\tab\tab\tab lw   $t0,  0($v1)\par
+\tab\tab\tab\tab\tab addi $t0, $t0, 1\par
+\tab\tab\tab\tab\tab sw   $t0,  0($v1)\par
+#                            ++hopPtr3;\par
+\tab\tab\tab\tab\tab addi $t3, $t3, 4\par
+endI2_LMGMC1223:\par
+endI1_LMGMC1223:\par
+#                      ++hopPtr1;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 4\par
+WTest_LMGMC1223:\par
+#                   if (hopPtr1 < endPtr1) goto begW_LMGMC1223;\par
+\tab\tab\tab\tab\tab blt $t1, $t9, begW_LMGMC1223\par
+\tab\tab\tab\tab\tab jr $ra\par
+#\}\par
+\tab\tab\tab\tab\tab\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void CoutCstr(const char cstr[])\par
+#\{\par
+###############################################################################\par
+CoutCstr:\par
+#################\par
+# Register usage:\par
+#################\par
+# (usual ones for syscall)\par
+###############################################################################\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab  \tab\tab\tab\tab\tab\tab # no stack frame needed\par
+#   cout << cstr;\par
+\tab\tab\tab\tab\tab li $v0, 4\par
+\tab\tab\tab\tab\tab syscall\par
+#\}\par
+#########################################\par
+# deliberate clobbering of caller-saved\par
+# (meant to catch improper presumptions -\par
+# no effect if no such presumptions made)\par
+#########################################\par
+\tab\tab\tab li $a0, 999999999\par
+\tab\tab\tab li $a1, 999999999\par
+\tab\tab\tab li $a2, 999999999\par
+\tab\tab\tab li $a3, 999999999\par
+\tab\tab\tab li $t0, 999999999\par
+\tab\tab\tab li $t1, 999999999\par
+\tab\tab\tab li $t2, 999999999\par
+\tab\tab\tab li $t3, 999999999\par
+\tab\tab\tab li $t4, 999999999\par
+\tab\tab\tab li $t5, 999999999\par
+\tab\tab\tab li $t6, 999999999\par
+\tab\tab\tab li $t7, 999999999\par
+\tab\tab\tab li $t8, 999999999\par
+\tab\tab\tab li $t9, 999999999\par
+\tab\tab\tab li $v0, 999999999\par
+\tab\tab\tab li $v1, 999999999\par
+#########################################\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void CoutCstrNL(const char cstr[])\par
+#\{\par
+###############################################################################\par
+CoutCstrNL:\par
+#################\par
+# Register usage:\par
+#################\par
+# (usual ones for syscall & function call)\par
+###############################################################################\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, -32\par
+\tab\tab\tab\tab\tab sw $ra, 28($sp)\par
+\tab\tab\tab\tab\tab sw $fp, 24($sp)\par
+\tab\tab\tab\tab\tab addiu $fp, $sp, 32\par
+\par
+\tab\tab\tab\tab\tab # BODY:\par
+#   CoutCstr(cstr);\par
+\tab\tab\tab\tab\tab jal CoutCstr\par
+#   cout << '\\n';\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab lw $fp, 24($sp)\par
+\tab\tab\tab\tab\tab lw $ra, 28($sp)\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, 32\par
+#\}\par
+#########################################\par
+# deliberate clobbering of caller-saved\par
+# (meant to catch improper presumptions -\par
+# no effect if no such presumptions made)\par
+#########################################\par
+\tab\tab\tab li $a0, 999999999\par
+\tab\tab\tab li $a1, 999999999\par
+\tab\tab\tab li $a2, 999999999\par
+\tab\tab\tab li $a3, 999999999\par
+\tab\tab\tab li $t0, 999999999\par
+\tab\tab\tab li $t1, 999999999\par
+\tab\tab\tab li $t2, 999999999\par
+\tab\tab\tab li $t3, 999999999\par
+\tab\tab\tab li $t4, 999999999\par
+\tab\tab\tab li $t5, 999999999\par
+\tab\tab\tab li $t6, 999999999\par
+\tab\tab\tab li $t7, 999999999\par
+\tab\tab\tab li $t8, 999999999\par
+\tab\tab\tab li $t9, 999999999\par
+\tab\tab\tab li $v0, 999999999\par
+\tab\tab\tab li $v1, 999999999\par
+#########################################\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void CoutOneInt(int oneInt)\par
+#\{\par
+###############################################################################\par
+CoutOneInt:\par
+#################\par
+# Register usage:\par
+#################\par
+# (usual ones for syscall)\par
+###############################################################################\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab  \tab\tab\tab\tab\tab\tab # no stack frame needed\par
+\tab\tab\tab\tab\tab # BODY:\par
+#   cout << oneInt;\par
+\tab\tab\tab\tab\tab li $v0, 1\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+#\}\par
+#########################################\par
+# deliberate clobbering of caller-saved\par
+# (meant to catch improper presumptions -\par
+# no effect if no such presumptions made)\par
+#########################################\par
+\tab\tab\tab li $a0, 999999999\par
+\tab\tab\tab li $a1, 999999999\par
+\tab\tab\tab li $a2, 999999999\par
+\tab\tab\tab li $a3, 999999999\par
+\tab\tab\tab li $t0, 999999999\par
+\tab\tab\tab li $t1, 999999999\par
+\tab\tab\tab li $t2, 999999999\par
+\tab\tab\tab li $t3, 999999999\par
+\tab\tab\tab li $t4, 999999999\par
+\tab\tab\tab li $t5, 999999999\par
+\tab\tab\tab li $t6, 999999999\par
+\tab\tab\tab li $t7, 999999999\par
+\tab\tab\tab li $t8, 999999999\par
+\tab\tab\tab li $t9, 999999999\par
+\tab\tab\tab li $v0, 999999999\par
+\tab\tab\tab li $v1, 999999999\par
+#########################################\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void ShowArray(const int array[], int used)\par
+#\{\par
+###############################################################################\par
+ShowArray:\par
+#################\par
+# Register usage:\par
+#################\par
+# $t1: i\par
+# $v1: holder for a value/address\par
+# $a1: used (as received)\par
+# (usual ones for syscall)\par
+###############################################################################\par
+#                   int i;\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab  \tab\tab\tab\tab\tab\tab # no stack frame needed\par
+\tab\tab\tab\tab\tab sw $a0, 0($sp)\tab\tab\tab\tab\tab # array as received saved in caller's frame\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   i = 0;\par
+\tab\tab\tab\tab\tab li $t1, 0\tab\tab\tab\tab\tab # $t1 is i\par
+#                   goto FTest_SA;\par
+\tab\tab\tab\tab\tab j FTest_SA\par
+begF_SA:\par
+#                      cout << array[i] << ' ' << ' ';\par
+\tab\tab\tab\tab\tab li $v0, 1\par
+\tab\tab\tab\tab\tab sll $v1, $t1, 2\tab\tab\tab\tab\tab # $v1 has i*4\par
+\tab\tab\tab\tab\tab lw $a0, 0($sp)\tab\tab\tab\tab\tab # array as received re-loaded into $a0\par
+\tab\tab\tab\tab\tab add $a0, $a0, $v1\tab\tab\tab\tab # $a0 has &array[i]\par
+\tab\tab\tab\tab\tab lw $a0, 0($a0)\tab\tab\tab\tab\tab # $a0 has array[i]\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab li $a0, ' '\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab syscall\par
+#                   ++i;\par
+\tab\tab\tab\tab\tab addi $t1, $t1, 1\par
+FTest_SA:\par
+#                   if (i < used) goto begF_SA;\par
+\tab\tab\tab\tab\tab blt $t1, $a1, begF_SA\par
+\par
+#                   cout << endl;\par
+\tab\tab\tab\tab\tab li $v0, 11\par
+\tab\tab\tab\tab\tab li $a0, '\\n'\par
+\tab\tab\tab\tab\tab syscall\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+#\}\par
+#########################################\par
+# deliberate clobbering of caller-saved\par
+# (meant to catch improper presumptions -\par
+# no effect if no such presumptions made)\par
+#########################################\par
+\tab\tab\tab li $a0, 999999999\par
+\tab\tab\tab li $a1, 999999999\par
+\tab\tab\tab li $a2, 999999999\par
+\tab\tab\tab li $a3, 999999999\par
+\tab\tab\tab li $t0, 999999999\par
+\tab\tab\tab li $t1, 999999999\par
+\tab\tab\tab li $t2, 999999999\par
+\tab\tab\tab li $t3, 999999999\par
+\tab\tab\tab li $t4, 999999999\par
+\tab\tab\tab li $t5, 999999999\par
+\tab\tab\tab li $t6, 999999999\par
+\tab\tab\tab li $t7, 999999999\par
+\tab\tab\tab li $t8, 999999999\par
+\tab\tab\tab li $t9, 999999999\par
+\tab\tab\tab li $v0, 999999999\par
+\tab\tab\tab li $v1, 999999999\par
+#########################################\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#void ShowArrayLabeled(const int array[], int used, const char label[])\par
+#\{\par
+###############################################################################\par
+ShowArrayLabeled:\par
+#################\par
+# Register usage:\par
+#################\par
+# (usual ones for function call)\par
+###############################################################################\par
+\tab\tab\tab\tab\tab # PROLOG:\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, -32\par
+\tab\tab\tab\tab\tab sw $ra, 28($sp)\par
+\tab\tab\tab\tab\tab sw $fp, 24($sp)\par
+\tab\tab\tab\tab\tab addiu $fp, $sp, 32\par
+\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab sw $a0, 0($fp)\tab\tab\tab\tab\tab # array as received saved in caller's frame\par
+\tab\tab\tab\tab\tab sw $a1, 4($fp)\tab\tab\tab\tab\tab # used as received saved in caller's frame\par
+\tab\tab\tab\tab\tab # BODY:\par
+#                   CoutCstr(label);\par
+\tab\tab\tab\tab\tab move $a0, $a2\par
+\tab\tab\tab\tab\tab jal CoutCstr\par
+#                   ShowArray(array, used);\par
+\tab\tab\tab\tab\tab lw $a0, 0($fp)\tab\tab\tab\tab\tab # array as received re-loaded into $a0\par
+\tab\tab\tab\tab\tab lw $a1, 4($fp)\tab\tab\tab\tab\tab # used as received re-loaded into $a1\par
+\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab\tab # CoutCstr might have clobbered $a0 & $a1\par
+\tab\tab\tab\tab\tab jal ShowArray\tab\tab\tab\tab\tab\par
+\tab\tab\tab\tab\tab # EPILOG:\par
+\tab\tab\tab\tab\tab lw $fp, 24($sp)\par
+\tab\tab\tab\tab\tab lw $ra, 28($sp)\par
+\tab\tab\tab\tab\tab addiu $sp, $sp, 32  \par
+#\}\par
+#########################################\par
+# deliberate clobbering of caller-saved\par
+# (meant to catch improper presumptions -\par
+# no effect if no such presumptions made)\par
+#########################################\par
+\tab\tab\tab li $a0, 999999999\par
+\tab\tab\tab li $a1, 999999999\par
+\tab\tab\tab li $a2, 999999999\par
+\tab\tab\tab li $a3, 999999999\par
+\tab\tab\tab li $t0, 999999999\par
+\tab\tab\tab li $t1, 999999999\par
+\tab\tab\tab li $t2, 999999999\par
+\tab\tab\tab li $t3, 999999999\par
+\tab\tab\tab li $t4, 999999999\par
+\tab\tab\tab li $t5, 999999999\par
+\tab\tab\tab li $t6, 999999999\par
+\tab\tab\tab li $t7, 999999999\par
+\tab\tab\tab li $t8, 999999999\par
+\tab\tab\tab li $t9, 999999999\par
+\tab\tab\tab li $v0, 999999999\par
+\tab\tab\tab li $v1, 999999999\par
+#########################################\par
+\tab\tab\tab\tab\tab jr $ra\par
+\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+#+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++#\par
+# main's string initialization code moved out of the way to reduce clutter\par
+###############################################################################\par
+begDataInitM:\par
+# back to PopulateArray1\par
+\par
+}
+ 

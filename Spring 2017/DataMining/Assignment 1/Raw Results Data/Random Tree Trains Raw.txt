@@ -1,0 +1,85 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.RandomTree -K 0 -M 1.0 -V 0.001 -S 1
+Relation:     trains
+Instances:    10
+Attributes:   33
+              Number_of_cars
+              Number_of_different_loads
+              num_wheels_2
+              length_2
+              shape_2
+              num_loads_2
+              load_shape_2
+              num_wheels_3
+              length_3
+              shape_3
+              num_loads_3
+              load_shape_3
+              num_wheels_4
+              length_4
+              shape_4
+              num_loads_4
+              load_shape_4
+              num_wheels_5
+              length_5
+              shape_5
+              num_loads_5
+              load_shape_5
+              Rectangle_next_to_rectangle
+              Rectangle_next_to_triangle
+              Rectangle_next_to_hexagon
+              Rectangle_next_to_circle
+              Triangle_next_to_triangle
+              Triangle_next_to_hexagon
+              Triangle_next_to_circle
+              Hexagon_next_to_hexagon
+              Hexagon_next_to_circle
+              Circle_next_to_circle
+              class
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+
+RandomTree
+==========
+
+shape_3 = closedrect : east (1/0)
+shape_3 = dblopnrect : east (1/0)
+shape_3 = hexagon : east (1/0)
+shape_3 = jaggedtop : west (1/0)
+shape_3 = openrect : west (2/0)
+shape_3 = opentrap : east (1/0)
+shape_3 = slopetop : east (1/0)
+shape_3 = ushaped : west (2/0)
+
+Size of the tree : 9
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances           5               50      %
+Incorrectly Classified Instances         5               50      %
+Kappa statistic                          0     
+Mean absolute error                      0.3411
+Root mean squared error                  0.5007
+Relative absolute error                 62.537  %
+Root relative squared error             91.8001 %
+Total Number of Instances               10     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.600    0.600    0.500      0.600    0.545      0.000    0.700     0.689     east
+                 0.400    0.400    0.500      0.400    0.444      0.000    0.700     0.753     west
+Weighted Avg.    0.500    0.500    0.500      0.500    0.495      0.000    0.700     0.721     
+
+=== Confusion Matrix ===
+
+ a b   <-- classified as
+ 3 2 | a = east
+ 3 2 | b = west
+

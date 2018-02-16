@@ -1,0 +1,50 @@
+run:
+Number of Threads: 1
+      1000 elements  =>       0 ms 
+      2000 elements  =>       0 ms 
+      4000 elements  =>       0 ms 
+      8000 elements  =>       0 ms 
+     16000 elements  =>      15 ms 
+     32000 elements  =>      62 ms 
+     64000 elements  =>     156 ms 
+    128000 elements  =>      94 ms 
+    256000 elements  =>     156 ms 
+    512000 elements  =>     344 ms 
+   1024000 elements  =>    1375 ms 
+   2048000 elements  =>    1610 ms 
+   4096000 elements  =>    5999 ms 
+   8192000 elements  =>   12283 ms 
+  16384000 elements  =>   28036 ms 
+Number of Threads: 2
+      1000 elements  =>      93 ms 
+      2000 elements  =>       0 ms 
+      4000 elements  =>       0 ms 
+      8000 elements  =>      47 ms 
+     16000 elements  =>       0 ms 
+     32000 elements  =>       0 ms 
+     64000 elements  =>      15 ms 
+    128000 elements  =>      32 ms 
+    256000 elements  =>      94 ms 
+    512000 elements  =>     234 ms 
+   1024000 elements  =>     438 ms 
+   2048000 elements  =>    1063 ms 
+   4096000 elements  =>    5172 ms 
+   8192000 elements  =>   10610 ms 
+  16384000 elements  =>   11173 ms 
+Number of Threads: 4
+      1000 elements  =>      16 ms 
+      2000 elements  =>       0 ms 
+      4000 elements  =>       0 ms 
+      8000 elements  =>       0 ms 
+     16000 elements  =>       0 ms 
+     32000 elements  =>       0 ms 
+     64000 elements  =>      63 ms 
+    128000 elements  =>      32 ms 
+    256000 elements  =>      78 ms 
+    512000 elements  =>     172 ms 
+   1024000 elements  =>     391 ms 
+   2048000 elements  =>     875 ms 
+   4096000 elements  =>    2203 ms 
+   8192000 elements  =>    9404 ms 
+  16384000 elements  =>    9063 ms 
+BUILD SUCCESSFUL (total time: 2 minutes 19 seconds)

@@ -1,0 +1,16 @@
+﻿  Project1Networking.cpp
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(101): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(102): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(103): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(111): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(118): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(136): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(190): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(262): warning C4018: '<': signed/unsigned mismatch
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(267): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(391): warning C4018: '<': signed/unsigned mismatch
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(396): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(485): warning C4018: '<': signed/unsigned mismatch
+c:\users\danie\documents\class\spring 2017\networking\project 1\project1networking\project1networking\project1networking.cpp(501): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Project1Networking.vcxproj -> C:\Users\danie\Documents\Class\Spring 2017\Networking\Project 1\Project1Networking\Project1Networking\Debug\Project1Networking.exe
+  Project1Networking.vcxproj -> C:\Users\danie\Documents\Class\Spring 2017\Networking\Project 1\Project1Networking\Project1Networking\Debug\Project1Networking.pdb (Full PDB)

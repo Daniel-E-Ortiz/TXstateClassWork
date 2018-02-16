@@ -1,0 +1,31 @@
+interface IBaseViewable {
+  public void baseView();
+}
+interface IProgrammingViewable {
+  public void programmingView();
+}
+interface IScienceViewable {
+  public void scienceView();
+}
+
+public class BasicCalculator implements IBaseViewable{
+  public void baseView(){
+    System.out.println("BasicCalculator: Implemented basic view");
+  }
+}
+public class ScienceCalculator implements IBaseViewable, IScienceViewable{
+  public void baseView(){
+    System.out.println("ScienceCalculator: Implemented basic view");
+  }
+  public void scienceView(){
+    System.out.println("ScienceCalculator: Implemented science view");
+  }
+}
+public class ProgrammingCalculator implements IBaseViewable, IProgrammingViewable{
+  public void baseView(){
+    System.out.println("ProgrammingCalculator: Implemented basic view");
+  }
+  public void programmingView(){
+    System.out.println("ProgrammingCalculator: Implemented programming view");
+  }
+}

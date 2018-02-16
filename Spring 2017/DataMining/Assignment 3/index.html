@@ -1,0 +1,101 @@
+<html>
+<header><title>deo15 Assignment 3: API Searching</title></header>
+<p>Daniel Ortiz</p>
+<p>CS 4315 Data Mining</p>
+<p>Assignment 3: API Searching</p>
+<head>
+<style>
+	div.result {
+		background-color: grey;
+		color: white;
+		margin: 20px 0 20px 0;
+		padding: 50px;
+	}
+</style>
+</head>
+<body>
+<div><script>
+  (function() {
+    var cx = '009760243401295159934:ytiieqbltcy';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search></div>
+<script>
+	// create the index
+var index = lunr(function(){
+    // boost increases the importance of words found in this field
+    this.field('title', {boost: 10});
+    this.field('abstract', {boost: 2});
+    this.field('content');
+    // the id
+    this.ref('href');
+});
+
+// this is a store with some document meta data to display
+// in the search results.
+var store = {};
+
+entries.forEach(function(entry){
+    index.add({
+        href: entry.href,
+        title: entry.title,
+        abstract: entry.abstract,
+        // hacky way to strip html, you should do better than that ;)
+        content: cheerio.load(entry.content.replace(/<[^>]*>/g, ' ')).root().text()
+    });
+    store[entry.href] = {title: entry.title, abstract: entry.abstract};
+});
+
+fs.writeFileSync('public/searchIndex.json', JSON.stringify({
+    index: index.toJSON(),
+    store: store
+}));
+</script>
+<script>
+	jQuery(function($) {
+    var index,
+        store,
+        data = $.getJSON(searchIndexUrl);
+
+    data.then(function(data){
+        store = data.store,
+        // create index
+        index = lunr.Index.load(data.index)
+    });
+
+    $('.search-field').keyup(function() {
+        var query = $(this).val();
+        if(query === ''){
+            jQuery('.search-results').empty();
+        }
+        else {
+            // perform search
+            var results = index.search(query);
+            data.then(function(data) {
+                $('.search-results').empty().append(
+                    results.length ?
+                    results.map(function(result){
+                        var el = $('<p>')
+                            .append($('<a>')
+                                .attr('href', result.ref)
+                                .text(store[result.ref].title)
+                            );
+                        if(store[result.ref].abstract){
+                            el.after($('<p>').text(store[result.ref].abstract));
+                        }
+                        return el;
+                    }) : $('<p><strong>No results found</strong></p>')
+                );
+            }); 
+        }
+    }); 
+});
+</script>
+</body>
+</html>

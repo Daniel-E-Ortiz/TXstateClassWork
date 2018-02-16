@@ -1,0 +1,89 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.trees.J48 -U -M 2
+Relation:     trains
+Instances:    10
+Attributes:   33
+              Number_of_cars
+              Number_of_different_loads
+              num_wheels_2
+              length_2
+              shape_2
+              num_loads_2
+              load_shape_2
+              num_wheels_3
+              length_3
+              shape_3
+              num_loads_3
+              load_shape_3
+              num_wheels_4
+              length_4
+              shape_4
+              num_loads_4
+              load_shape_4
+              num_wheels_5
+              length_5
+              shape_5
+              num_loads_5
+              load_shape_5
+              Rectangle_next_to_rectangle
+              Rectangle_next_to_triangle
+              Rectangle_next_to_hexagon
+              Rectangle_next_to_circle
+              Triangle_next_to_triangle
+              Triangle_next_to_hexagon
+              Triangle_next_to_circle
+              Hexagon_next_to_hexagon
+              Hexagon_next_to_circle
+              Circle_next_to_circle
+              class
+Test mode:    10-fold cross-validation
+
+=== Classifier model (full training set) ===
+
+J48 unpruned tree
+------------------
+
+Rectangle_next_to_triangle = 0
+|   shape_3 = closedrect: west (0.0)
+|   shape_3 = dblopnrect: west (0.0)
+|   shape_3 = hexagon: east (1.0)
+|   shape_3 = jaggedtop: west (1.0)
+|   shape_3 = openrect: west (2.0)
+|   shape_3 = opentrap: west (0.0)
+|   shape_3 = slopetop: west (0.0)
+|   shape_3 = ushaped: west (2.0)
+Rectangle_next_to_triangle = 1: east (4.0)
+
+Number of Leaves  : 	9
+
+Size of the tree : 	11
+
+
+Time taken to build model: 0 seconds
+
+=== Stratified cross-validation ===
+=== Summary ===
+
+Correctly Classified Instances           9               90      %
+Incorrectly Classified Instances         1               10      %
+Kappa statistic                          0.8   
+Mean absolute error                      0.2   
+Root mean squared error                  0.3464
+Relative absolute error                 36.6667 %
+Root relative squared error             63.5085 %
+Total Number of Instances               10     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.800    0.000    1.000      0.800    0.889      0.816    0.800     0.900     east
+                 1.000    0.200    0.833      1.000    0.909      0.816    0.800     0.833     west
+Weighted Avg.    0.900    0.100    0.917      0.900    0.899      0.816    0.800     0.867     
+
+=== Confusion Matrix ===
+
+ a b   <-- classified as
+ 4 1 | a = east
+ 0 5 | b = west
+
